@@ -3,7 +3,7 @@ name: Deploy to Kubernetes
 on:
   push:
     branches:
-      - main  # substitua pelo nome da sua branch principal
+      - main
 
 jobs:
   deploy:
@@ -30,7 +30,7 @@ jobs:
         docker push fernandohs99/metabolismo-app:${{ steps.set_tag.outputs.TAG }}
 
     - name: Deploy to Kubernetes
-      uses: appleboy/kubernetes-action@master
+      uses: appleboy/kubernetes-action@v2.3.1
       with:
         kube_config_data: ${{ secrets.KUBE_CONFIG_DATA }}
         namespace: cluster01
