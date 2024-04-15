@@ -1,0 +1,27 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metabolismo Basal Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Metabolismo Basal Calculator</h1>
+    <form action="/calculate" method="post">
+        <label for="gender">Sexo:</label>
+        <select name="gender" id="gender">
+            <option value="male">Masculino</option>
+            <option value="female">Feminino</option>
+        </select><br><br>
+        <label for="weight">Peso (kg):</label>
+        <input type="number" name="weight" id="weight"><br><br>
+        <label for="height">Altura (cm):</label>
+        <input type="number" name="height" id="height"><br><br>
+        <label for="age">Idade:</label>
+        <input type="number" name="age" id="age"><br><br>
+        <input type="submit" value="Calcular">
+    </form>
+</body>
+</html>

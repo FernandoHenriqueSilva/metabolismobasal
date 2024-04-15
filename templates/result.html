@@ -1,0 +1,14 @@
+<!-- templates/result.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado do Metabolismo Basal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Resultado do Metabolismo Basal</h1>
+    <p>O seu metabolismo basal é: {{ basal_metabolism }} kcal/dia</p>
+</body>
+</html>
