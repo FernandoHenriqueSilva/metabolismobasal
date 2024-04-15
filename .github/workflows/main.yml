@@ -1,0 +1,37 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - main  # substitua pelo nome da sua branch principal
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set image tag
+      id: set_tag
+      run: echo "::set-output name=TAG::v1-$(date +'%Y%m%d%H%M%S')"
+
+    - name: Build Docker image
+      run: |
+        docker build -t fernandohs99/metabolismo-app:${{ steps.set_tag.outputs.TAG }} .
+
+    - name: Push Docker image to Docker Hub
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+        docker push fernandohs99/metabolismo-app:${{ steps.set_tag.outputs.TAG }}
+
+    - name: Deploy to Kubernetes
+      uses: appleboy/kubernetes-action@master
+      with:
+        kube_config_data: ${{ secrets.KUBE_CONFIG_DATA }}
+        namespace: cluster01
+        manifest_files: k8s/deployment.yaml
