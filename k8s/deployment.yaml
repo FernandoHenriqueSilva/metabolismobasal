@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: metabolismo-app
-        image: fernandohs99/metabolismo-app:v1
+        image: fernandohs99/metabolismo-app:v2
         ports:
         - containerPort: 5010
 ---
@@ -30,4 +30,4 @@ spec:
   - protocol: TCP
     port: 5010
     targetPort: 5010
-    nodePort: 30002  # Escolha uma porta disponível no seu cluster para o NodePort
+    nodePort: 30000  # Escolha uma porta disponível no seu cluster para o NodePort
