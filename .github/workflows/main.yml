@@ -30,6 +30,7 @@ jobs:
         docker push fernandohs99/metabolismo-app:${{ steps.set_tag.outputs.TAG }}
 
   deploy_to_kubernetes:
+    needs: build_and_push
     runs-on: ubuntu-latest
 
     steps:
