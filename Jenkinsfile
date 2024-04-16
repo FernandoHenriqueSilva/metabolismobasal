@@ -5,7 +5,7 @@ pipeline {
         stage ('Build Image') {
             steps {
                 script {
-                    dockerapp = docker.build("fernandohs99/metabolismo-app", '-f Dockerfile .')
+                    dockerapp = docker.build("fernandohs99/metabolismo-app", '-f ${WORKSPACE}/Dockerfile .')
                 }
                 echo 'Iniciando Pipeline'
             }
