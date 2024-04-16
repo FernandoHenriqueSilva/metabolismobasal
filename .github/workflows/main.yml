@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  build_and_push:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,9 +29,19 @@ jobs:
         echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
         docker push fernandohs99/metabolismo-app:${{ steps.set_tag.outputs.TAG }}
 
+  deploy_to_kubernetes:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
     - name: Deploy to Kubernetes
-      uses: appleboy/kubernetes-action@v2.3.1
+      uses: explorium-ai/deploy-k8s-action@v0.1.1
       with:
-        kube_config_data: ${{ secrets.KUBE_CONFIG_DATA }}
-        namespace: k3s-default
-        manifest_files: ./k8s/deployment.yaml
+        install_local_cluster: false
+        kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
+        charts: |
+          - path/to/chart1
+          - path/to/chart2
+          # Adicione mais gráficos conforme necessário
