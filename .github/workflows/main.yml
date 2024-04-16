@@ -40,7 +40,6 @@ jobs:
     - name: Deploy to Kubernetes
       uses: explorium-ai/deploy-k8s-action@v0.1.1
       with:
-        install_local_cluster: false
         kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
         charts: |
           - path/to/chart1
