@@ -15,7 +15,7 @@ jobs:
 
     - name: Set image tag
       id: set_tag
-      run: echo "::set-output name=TAG::v1-$(date +'%Y%m%d%H%M%S')"
+      run: echo "::set-output name=TAG::v1-${{ github.run_number }}"
 
     - name: Build Docker image
       run: |
@@ -33,5 +33,5 @@ jobs:
       uses: appleboy/kubernetes-action@v2.3.1
       with:
         kube_config_data: ${{ secrets.KUBE_CONFIG_DATA }}
-        namespace: cluster01
+        namespace: k3s-default
         manifest_files: k8s/deployment.yaml
