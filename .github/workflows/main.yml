@@ -34,4 +34,4 @@ jobs:
       with:
         kube_config_data: ${{ secrets.KUBE_CONFIG_DATA }}
         namespace: k3s-default
-        manifest_files: k8s/deployment.yaml
+        manifest_files: ./k8s/deployment.yaml
