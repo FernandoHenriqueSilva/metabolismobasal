@@ -30,7 +30,7 @@ jobs:
         docker push fernandohs99/metabolismo-app:${{ steps.set_tag.outputs.TAG }}
 
     - name: Deploy to Kubernetes
-      uses: appleboy/kubernetes-action@v2.3.1
+      uses: explorium-ai/deploy-k8s-action@v0.1.1
       with:
         kube_config_data: ${{ secrets.KUBE_CONFIG_DATA }}
         namespace: k3s-default
