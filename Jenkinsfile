@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://localhost:6443']) {
-                    sh '/usr/local/bin/kubectl apply -f deployment.yaml --validate=false' 
+                    sh '/usr/local/bin/kubectl apply -f /home/fernando/repos/metabolismobasal/deployment.yaml --validate=false' 
                     }
                 }
             }
