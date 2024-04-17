@@ -9,7 +9,7 @@ pipeline {
             steps {
                 script {
                     // Navegar para o diretório do projeto antes de executar o comando Docker
-                    dir('/repositorios/metabolismobasal/') {
+                    dir('/home/fernando/repos/metabolismobasal/') {
                         dockerapp = docker.build("fernandohs99/metabolismo-app", '-f Dockerfile')
                     }
                 }
