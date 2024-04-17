@@ -21,7 +21,7 @@ pipeline {
                         sh '/usr/local/bin/kubectl apply -f /home/fernando/repos/metabolismobasal/k8s/deployment.yaml --validate=false' 
 =======
     options {
-        // Definir o diretório de trabalho do pipeline.
+        // Definir o diretório de trabalho do pipeline
         buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10'))
         }
     stages {
