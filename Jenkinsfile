@@ -1,7 +1,7 @@
 pipeline {
     agent any
     options {
-        // Definir o diretório de trabalho do pipeline
+        // Definir o diretório de trabalho do pipeline.
         buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10'))
         }
     stages {
