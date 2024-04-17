@@ -1,16 +1,25 @@
 pipeline {
     agent any
-    options {
-        // Definir o diretório de trabalho do pipeline.
-        buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10'))
-        }
     stages {
-        stage('Build Image') {
+        stage('Build and Push Image') {
+            steps {
+                dir('/home/fernando/repositorios/metabolismobasal/') {
+                    script {
+                        docker.build("fernandohs99/metabolismo-app:${env.BUILD_ID}")
+                        docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
+                            def appMetabolismoImage = docker.image("fernandohs99/metabolismo-app:${env.BUILD_ID}")
+                            appMetabolismoImage.push("latest")
+                            appMetabolismoImage.push("${env.BUILD_ID}")
+                        }   
+                    }   
+                }
+            }
+        }
+        stage('Deploy para Kubernetes') {
             steps {
                 script {
-                    // Navegar para o diretório do projeto antes de executar o comando Docker
-                    dir('/home/fernando/repos/metabolismobasal/') {
-                        dockerapp = docker.build("fernandohs99/metabolismo-app", '-f /home/fernando/repos/metabolismobasal/Dockerfile')
+                    withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://localhost:6443']) {
+                    sh '/usr/local/bin/kubectl apply -f deployment.yaml --validate=false' 
                     }
                 }
             }
