@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage('Build and Push Image') {
             steps {
-                dir('/home/fernando/repositorios/metabolismobasal/') {
                     script {
                         docker.build("fernandohs99/metabolismo-app:${env.BUILD_ID}")
                         docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
@@ -14,7 +13,6 @@ pipeline {
                     }   
                 }
             }
-        }
         stage('Deploy para Kubernetes') {
             steps {
                 script {
