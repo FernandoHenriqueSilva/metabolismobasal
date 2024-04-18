@@ -17,8 +17,12 @@ pipeline {
             }
         }
         stage('Deploy para Kubernetes') {
+            environment {
+                tag_version = "${env.BUILD_ID}"
+            }
             steps {
                 script {
+                    sh 'sed -i "s/{{tag}}/$tag_version/g" /home/fernando/repos/metabolismobasal/k8s/deployment.yaml'
                     sh '/usr/local/bin/kubectl apply -f /home/fernando/repos/metabolismobasal/k8s/deployment.yaml --validate=false' 
                 }
             }

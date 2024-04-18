@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: metabolismo-app
-        image: fernandohs99/metabolismo-app:v2
+        image: fernandohs99/metabolismo-app:{{tag}}
         ports:
         - containerPort: 5010
 ---
