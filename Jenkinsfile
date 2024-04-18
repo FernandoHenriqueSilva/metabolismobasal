@@ -4,7 +4,7 @@ pipeline {
         KUBECONFIG = '/home/fernando/config'
     }
     stages {
-        stage('Build and Push Image') {
+        stage('Build e Push Imagem') {
             steps {
                 script {
                     docker.build("fernandohs99/metabolismo-app:${env.BUILD_ID}")
