@@ -1,6 +1,8 @@
 pipeline {
     agent any
-<<<<<<< HEAD
+    environment {
+        KUBECONFIG = '/home/fernando/config'
+    }
     stages {
         stage('Build and Push Image') {
             steps {
@@ -17,22 +19,7 @@ pipeline {
         stage('Deploy para Kubernetes') {
             steps {
                 script {
-                    withKubeConfig(configFile: '/home/fernando/config') {
-                        sh '/usr/local/bin/kubectl apply -f /home/fernando/repos/metabolismobasal/k8s/deployment.yaml --validate=false' 
-=======
-    options {
-        // Definir o diretório de trabalho do pipeline
-        buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10'))
-        }
-    stages {
-        stage('Build Image') {
-            steps {
-                script {
-                    // Navegar para o diretório do projeto antes de executar o comando Docker
-                    dir('/home/fernando/repos/metabolismobasal/') {
-                        dockerapp = docker.build("fernandohs99/metabolismo-app", '-f Dockerfile')
->>>>>>> 6434134 (Repos)
-                    }
+                    sh '/usr/local/bin/kubectl apply -f /home/fernando/repos/metabolismobasal/k8s/deployment.yaml --validate=false' 
                 }
             }
         }
